@@ -1,76 +1,84 @@
-# MCP URL Fetcher
+# MCP URL Format Converter
 
-A Model Context Protocol (MCP) server that enables LLMs to fetch and process web content in multiple formats.
+A Model Context Protocol (MCP) server that fetches content from any URL and converts it to your desired output format.
 
 ## Overview
 
-MCP URL Fetcher provides tools for retrieving content from the web in HTML, JSON, Markdown, and plain text formats. It's designed to work with any MCP-compatible client, including Claude for Desktop, enabling LLMs to access and analyze web content securely.
+MCP URL Format Converter provides tools for retrieving content from any web URL and transforming it into various formats (HTML, JSON, Markdown, or plain text), regardless of the original content type. It's designed to work with any MCP-compatible client, including Claude for Desktop, enabling LLMs to access, transform, and analyze web content in a consistent format.
 
 ## Features
 
--   📄 **Multi-format Support**: Fetch content in HTML, JSON, Markdown, and plain text
--   🔍 **Automatic Content Detection**: Smart format detection based on HTTP headers and file extensions
--   🔧 **Format-specific Processing**:
-    -   HTML content extraction
-    -   JSON pretty-printing and path-based extraction
-    -   Complete Markdown rendering
-    -   Raw text retrieval
--   📜 **History Tracking**: Maintains logs of recently fetched URLs
--   📋 **Pre-built Prompts**: Ready-to-use templates for web content analysis
--   🛡️ **Robust Error Handling**: Comprehensive error handling for all operations
+- 🔄 **Format Conversion**: Transform any web content to HTML, JSON, Markdown, or plain text
+- 🌐 **Universal Input Support**: Handle websites, APIs, raw files, and more
+- 🔍 **Automatic Content Detection**: Intelligently identifies source format
+- 🧰 **Robust Library Support**: Uses industry-standard libraries:
+  - Cheerio for HTML parsing
+  - Marked for Markdown processing
+  - Fast-XML-Parser for XML handling
+  - CSVtoJSON for CSV conversion
+  - SanitizeHTML for security
+  - Turndown for HTML-to-Markdown conversion
+- 🔧 **Advanced Format Processing**:
+  - HTML parsing with metadata extraction
+  - JSON pretty-printing and structure preservation
+  - Markdown rendering with styling
+  - CSV-to-table conversion
+  - XML-to-JSON transformation
+- 📜 **History Tracking**: Maintains logs of recently fetched URLs
+- 🛡️ **Security Focus**: Content sanitization to prevent XSS attacks
 
 ## Installation
 
 ### Prerequisites
 
--   Node.js 16.x or higher
--   npm or yarn
+- Node.js 16.x or higher
+- npm or yarn
 
 ### Quick Start
 
 1. Clone the repository:
 
-    ```bash
-    git clone https://github.com/yourusername/mcp-url-fetcher.git
-    cd mcp-url-fetcher
-    ```
+   ```bash
+   git clone https://github.com/yourusername/mcp-url-converter.git
+   cd mcp-url-converter
+   ```
 
 2. Install dependencies:
 
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
 3. Build the project:
 
-    ```bash
-    npm run build
-    ```
+   ```bash
+   npm run build
+   ```
 
 4. Run the server:
-    ```bash
-    npm start
-    ```
+   ```bash
+   npm start
+   ```
 
 ## Integration with Claude for Desktop
 
 1. Open your Claude for Desktop configuration file:
 
-    - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-    - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+   - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+   - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
 
-2. Add the URL Fetcher server to your configuration:
+2. Add the URL converter server to your configuration:
 
-    ```json
-    {
-        "mcpServers": {
-            "url-fetcher": {
-                "command": "node",
-                "args": ["/absolute/path/to/mcp-url-fetcher/build/index.js"]
-            }
-        }
-    }
-    ```
+   ```json
+   {
+     "mcpServers": {
+       "url-converter": {
+         "command": "node",
+         "args": ["/absolute/path/to/mcp-url-converter/build/index.js"]
+       }
+     }
+   }
+   ```
 
 3. Restart Claude for Desktop
 
@@ -78,83 +86,86 @@ MCP URL Fetcher provides tools for retrieving content from the web in HTML, JSON
 
 ### `fetch`
 
-Fetches content from a URL with automatic format detection.
+Fetches content from any URL and automatically detects the best output format.
 
 **Parameters:**
 
--   `url` (string, required): The URL to fetch content from
--   `format` (string, optional): Format to fetch (`auto`, `html`, `json`, `markdown`, `text`). Default: `auto`
+- `url` (string, required): The URL to fetch content from
+- `format` (string, optional): Format to convert to (`auto`, `html`, `json`, `markdown`, `text`). Default: `auto`
 
 **Example:**
 
 ```
-Can you fetch the content from https://example.com and tell me what it's about?
-```
-
-### `fetch-html`
-
-Fetches HTML content from a URL.
-
-**Parameters:**
-
--   `url` (string, required): The URL to fetch HTML from
--   `extractText` (boolean, optional): Whether to extract text content only. Default: `false`
-
-**Example:**
-
-```
-Can you fetch the HTML structure of https://example.com?
+Can you fetch https://example.com and choose the best format to display it?
 ```
 
 ### `fetch-json`
 
-Fetches and parses JSON content from a URL.
+Fetches content from any URL and converts it to JSON format.
 
 **Parameters:**
 
--   `url` (string, required): The URL to fetch JSON from
--   `prettyPrint` (boolean, optional): Whether to pretty-print the JSON. Default: `true`
--   `path` (string, optional): JSONPath-like expression to extract specific data
+- `url` (string, required): The URL to fetch content from
+- `prettyPrint` (boolean, optional): Whether to pretty-print the JSON. Default: `true`
 
 **Example:**
 
 ```
-Can you fetch the user data from https://api.example.com/users/1?
+Can you fetch https://example.com and convert it to JSON format?
+```
+
+### `fetch-html`
+
+Fetches content from any URL and converts it to HTML format.
+
+**Parameters:**
+
+- `url` (string, required): The URL to fetch content from
+- `extractText` (boolean, optional): Whether to extract text content only. Default: `false`
+
+**Example:**
+
+```
+Can you fetch https://api.example.com/users and convert it to HTML?
 ```
 
 ### `fetch-markdown`
 
-Fetches Markdown content from a URL.
+Fetches content from any URL and converts it to Markdown format.
 
 **Parameters:**
 
--   `url` (string, required): The URL to fetch Markdown from
+- `url` (string, required): The URL to fetch content from
 
 **Example:**
 
 ```
-Can you fetch and render the README from https://raw.githubusercontent.com/user/repo/main/README.md?
+Can you fetch https://example.com and convert it to Markdown?
 ```
 
 ### `fetch-text`
 
-Fetches plain text content from a URL.
+Fetches content from any URL and converts it to plain text format.
 
 **Parameters:**
 
--   `url` (string, required): The URL to fetch text from
+- `url` (string, required): The URL to fetch content from
 
 **Example:**
 
 ```
-Can you fetch the text content from https://example.com/robots.txt?
+Can you fetch https://example.com and convert it to plain text?
 ```
+
+### `web-search` and `deep-research`
+
+These tools provide interfaces to Perplexity search capabilities (when supported by the MCP host).
 
 ## Available Resources
 
 ### `recent-urls://list`
 
-Returns a list of recently fetched URLs with timestamps and content types.
+Returns a list of recently fetched URLs with timestamps and output formats.
 
 **Example:**
 
@@ -162,25 +173,15 @@ Returns a list of recently fetched URLs with timestamps and content types.
 What URLs have I fetched recently?
 ```
 
-## Available Prompts
+## Security
 
-### `fetch-website`
+This server implements several security measures:
 
-Template for fetching and analyzing website content.
-
-**Parameters:**
-
--   `url` (string, required): URL of the website to fetch
--   `format` (string, optional): Format to fetch (`html` or `text`). Default: `text`
-
-### `fetch-api`
-
-Template for fetching and analyzing API data.
-
-**Parameters:**
-
--   `url` (string, required): URL of the API endpoint
--   `path` (string, optional): JSON path to extract specific data
+- HTML sanitization using `sanitize-html` to prevent XSS attacks
+- Content validation before processing
+- Error handling and safe defaults
+- Input parameter validation with Zod
+- Safe output encoding
 
 ## Testing
 
@@ -195,7 +196,7 @@ npm run test
 ### Common Issues
 
 1. **Connection errors**: Verify that the URL is accessible and correctly formatted
-2. **JSON parsing errors**: Confirm that the URL returns valid JSON
+2. **Conversion errors**: Some complex content may not convert cleanly between formats
 3. **Cross-origin issues**: Some websites may block requests from unknown sources
 
 ### Debug Mode
@@ -212,9 +213,10 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgments
 
--   Built with the [Model Context Protocol](https://modelcontextprotocol.io/)
--   Powered by Node.js and TypeScript
+- Built with the [Model Context Protocol](https://modelcontextprotocol.io/)
+- Uses modern, actively maintained libraries with security focus
+- Sanitization approach based on OWASP recommendations
 
 ---
 
-Made with ❤️ for the MCP community
+Last updated: 29 March 2025
