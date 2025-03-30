@@ -1,48 +1,50 @@
 {
-  "name": "mcp-url-fetcher",
-  "version": "1.0.0",
-  "description": "MCP server for fetching and processing URL content in various output formats",
-  "type": "module",
-  "main": "build/index.js",
-  "scripts": {
-    "build": "tsc",
-    "start": "node build/index.js",
-    "dev": "tsc -w",
-    "test": "npx @modelcontextprotocol/inspector node build/index.js"
-  },
-  "keywords": [
-    "mcp",
-    "model-context-protocol",
-    "url",
-    "fetcher",
-    "html",
-    "json",
-    "markdown",
-    "text"
-  ],
-  "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.8.0",
-    "cheerio": "^1.0.0",
-    "csvtojson": "^2.0.10",
-    "fast-xml-parser": "^5.0.9",
-    "json2csv": "^6.0.0-alpha.2",
-    "marked": "^15.0.7",
-    "node-fetch": "^3.3.2",
-    "sanitize-html": "^2.15.0",
-    "turndown": "^7.2.0",
-    "zod": "^3.24.2"
-  },
-  "devDependencies": {
-    "@types/json2csv": "^5.0.7",
-    "@types/marked": "^6.0.0",
-    "@types/node": "^22.13.14",
-    "@types/sanitize-html": "^2.15.0",
-    "@types/turndown": "^5.0.5",
-    "typescript": "^5.8.2"
-  },
-  "engines": {
-    "node": ">=16.0.0"
-  }
+    "name": "mcp-url-fetcher",
+    "version": "1.0.1",
+    "description": "MCP server for fetching and processing URL content in various output formats",
+    "type": "module",
+    "main": "build/index.js",
+    "scripts": {
+        "build": "tsc",
+        "start": "node build/index.js",
+        "dev": "tsc -w",
+        "test": "npx @modelcontextprotocol/inspector node build/index.js"
+    },
+    "keywords": [
+        "mcp",
+        "model-context-protocol",
+        "url",
+        "fetcher",
+        "html",
+        "json",
+        "markdown",
+        "text",
+        "playwright"
+    ],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.8.0",
+        "cheerio": "^1.0.0",
+        "csvtojson": "^2.0.10",
+        "fast-xml-parser": "^5.0.9",
+        "json2csv": "^6.0.0-alpha.2",
+        "marked": "^15.0.7",
+        "node-fetch": "^3.3.2",
+        "playwright": "^1.51.1",
+        "sanitize-html": "^2.15.0",
+        "turndown": "^7.2.0",
+        "zod": "^3.24.2"
+    },
+    "devDependencies": {
+        "@types/json2csv": "^5.0.7",
+        "@types/marked": "^6.0.0",
+        "@types/node": "^22.13.14",
+        "@types/sanitize-html": "^2.15.0",
+        "@types/turndown": "^5.0.5",
+        "typescript": "^5.8.2"
+    },
+    "engines": {
+        "node": ">=16.0.0"
+    }
 }
